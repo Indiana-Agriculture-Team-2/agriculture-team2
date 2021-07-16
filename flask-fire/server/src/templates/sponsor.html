@@ -3,15 +3,34 @@
 
 {% block content %}
 
+  <!-- Title for page -->
+  <div class="container-sm">
+    <div class="row my-3">
+      <h1>Sponsor a Farmer</h1>
+    </div>
+  </div>
+
   <div class="row">
-  {% for x in farmers %}
+  <!-- Cards for each farmer-->
+  {% for index in range(farmers|length) %}
     <div class="col-sm-4 d-flex justify-content-center">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card my-2" style="width: 18rem;">
+        <img class="card-img-top" src="{{url_for('static', filename='profilephoto.png')}}" alt="Profile picture">
         <div class="card-body">
-          <h5 class="card-title">{{ x }}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <h5 class="card-title">{{ farmers[index] }}</h5>
+          <!-- Farm name and location info for each farmer -->
+          <p class="card-text">
+            {{ farmNames[index] }} <br>
+            {{ locations[index] }}
+          </p>
+          <!--Product buttons-->
+          {% for eachProduct in products[index] %}
+          <a href="#" class="btn btn-warning my-2">Buy {{ eachProduct }}</a> <br>
+          {% endfor %}
+          <!--Delivery button if farmer has it-->
+          {% if delivery[index] %}
+          <a href="#" class="btn btn-success my-2">Get Delivery</a>
+          {% endif%}
         </div>
       </div>
     </div>

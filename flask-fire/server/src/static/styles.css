@@ -1,3 +1,7 @@
+html *
+{
+   font-family: 'Times New Roman', Times, serif !important;
+}
 
 .farmer {
     background-color: rgb(100, 100, 100);
@@ -12,6 +16,9 @@
 }
 
 .btn-warning {
-    background-color: rgba(247,200,107,255)
-    
+    background-color: rgba(247,200,107,255);
+}
+
+.btn-success {
+    background-color: rgb(89, 130, 22);
 }
