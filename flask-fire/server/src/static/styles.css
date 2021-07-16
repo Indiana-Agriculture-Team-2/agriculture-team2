@@ -3,3 +3,15 @@
     background-color: rgb(100, 100, 100);
     
 }
+
+.homeimage {
+    height: 382px;
+    background-image: url(HomePagePhoto.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-warning {
+    background-color: rgba(247,200,107,255)
+    
+}
