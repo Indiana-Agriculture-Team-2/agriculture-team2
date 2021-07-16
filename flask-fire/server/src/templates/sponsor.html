@@ -25,7 +25,7 @@
           </p>
           <!--Product buttons-->
           {% for eachProduct in products[index] %}
-          <a href="#" class="btn btn-warning my-2">Buy {{ eachProduct }}</a> <br>
+          <a href="{{url_for('checkout', name=eachProduct)}}" class="btn btn-warning my-2">Buy {{ eachProduct }}</a> <br>
           {% endfor %}
           <!--Delivery button if farmer has it-->
           {% if delivery[index] %}

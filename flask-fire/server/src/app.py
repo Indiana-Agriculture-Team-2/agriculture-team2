@@ -26,6 +26,11 @@ delivery = [True, True, False, True, False, False]
 def sponsor():
     return render_template("sponsor.html", farmers=farmers, farmNames=farmNames, locations=locations, products=products, delivery=delivery)
 
+
+@app.route('/checkout/<name>/')
+def checkout(name):
+    return render_template("checkout.html", name=name)
+
 if __name__ == '__main__':
     ##debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080))
     app.run()
