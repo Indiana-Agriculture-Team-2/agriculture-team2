@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %} Account Creation {% endblock %}
+
+{% block content %}
+
+<h1 class="m-3"> Start selling on BumperCrop now! </h1>
+<h2 class="m-5"> Create your account </h2>
+
+<div class="container-sm">
+    <form>
+        <div class="input-group mb-3">
+            <span class="input-group-text">First and last name</span>
+            <input type="text" aria-label="First name" class="form-control">
+            <input type="text" aria-label="Last name" class="form-control">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Name of Farm</span>
+            <input class="form-control" aria-label="Name of Farm" type="text"></textarea>
+        </div>
+        State
+        <select class="custom-select mb-3">
+            <option selected>Choose your state...</option>
+            {% for state in states %}
+            <option value="1">{{ state }}</option>
+            {% endfor %}
+        </select>
+        <div class="input-group mb-3">
+            <span class="input-group-text">City</span>
+            <input class="form-control" aria-label="City" type="text"></textarea>
+        </div>
+        <div class="form-group mb-3">
+            <label for="exampleFormControlSelect2">Choose which items to sell</label>
+            <select multiple class="form-control" id="exampleFormControlSelect2">
+            {% for item in productsList %}
+              <option>{{item}}</option>
+            {% endfor %}
+            </select>
+          </div>
+        <a href="{{url_for('complete')}}" class="btn btn-warning my-2" type="submit">Complete</a>
+    </form>
+</div>
+
+{% endblock %}
