@@ -22,3 +22,27 @@ html *
 .btn-success {
     background-color: rgb(89, 130, 22);
 }
+
+.postDiv {
+    background-color: rgba(237,237,237,255);
+}
+
+.form-control {
+    background-color: rgba(237,237,237,255);
+}
+
+.submit-button {
+    background-color: rgba(247,200,107,255);
+}
+
+.nav-link {
+    text-decoration: underline;
+    text-decoration-color: rgba(254,228,180,255);
+    padding: 20px;
+    margin-left: 30px;
+    font-size: large;
+}
+
+.image-contain {
+    
+}

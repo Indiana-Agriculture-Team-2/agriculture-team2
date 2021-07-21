@@ -1,21 +1,17 @@
-from flask import Flask, render_template, url_for, make_response
+from flask import Flask, render_template, url_for, request
 import os
-import time
+
+UPLOAD_FOLDER = "C:/Users/colej/OneDrive/Documents/SOSChallenge_2021/agriculture-team2/flask-fire/server/src/static"
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-class Farmer:
-    def __init__(self, farmName, location, products, delivery):
-        self.farmName = farmName
-        self.location = location
-        self.products = products
-        self.delivery = delivery
-
-## Example Farmer Data
+## Starter Farmer Data
 farmers = ["David Lamb", "Michael Smith", "John Doe", "Sarah Smith", "Joe Brown", "Emma Johnson"]
 farmNames = ["Boulder Valley Lands", "Bull's Eye Farms", "Black Raven Farm", "Meadowland Pastures", "Robinwood Estate", "Stallion Estate"]
 locations = ["Lebonon, IN", "Carmel, IN", "Fort Wayne, IN", "Bluffton, IN", "Bloominton, IN", "Greenfield, IN"]
@@ -32,6 +28,9 @@ states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado",
   "North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania",
   "Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah",
   "Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+
+## Starter social media post data
+postData = [["These strawberry seeds are fresh, ripe, and juicy! Order strawberry seeds online. Don't miss out!", "David Lamb"], ["Watermelon in season now! Save 20% on watermelon seeds!", "Michael Smith"]]
 
 @app.route('/sponsor')
 def sponsor():
@@ -51,7 +50,30 @@ def complete():
 
 @app.route('/social', methods=["GET", "POST"])
 def social():
-    return render_template("social.html")
+    if request.method == "POST":
+        ######FILE UPLOAD#########
+        ##Used https://stackoverflow.com/questions/44926465/upload-image-in-flask for code in between commments
+        if 'file' not in request.files:
+            return 'there is no file in form!'
+        file = request.files['file']
+        path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(path)
+        filename = file.filename
+        print(file)
+        ######FILE UPLOAD#########
+
+        ##TEXT AND DATA STRUCTURE UPDATE##
+        newPost = request.form["nm"]
+        newPostUser = "New User" ##Temporary as we don't have accounts functional yet.
+        if file != "":
+            postData.append([newPost, newPostUser, filename])
+        else:
+            postData.append([newPost, newPostUser])
+        print(postData)
+        ##RENDER TEMPLATE##
+        return render_template("social.html", postData=postData)
+    else:
+        return render_template("social.html", postData=postData)
 
 if __name__ == '__main__':
     ##debug=True,host='0.0.0.0',port=int(os.environ.get('PORT', 8080))
